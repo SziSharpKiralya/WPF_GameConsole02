@@ -18,7 +18,6 @@ namespace WPF_GameConsole
 	public partial class MainWindow : Window
 	{
 		private Random random = new Random();
-		private List<Pipe> pipes = new();
 		private string current = "";
 		private bool state = false;
 		
