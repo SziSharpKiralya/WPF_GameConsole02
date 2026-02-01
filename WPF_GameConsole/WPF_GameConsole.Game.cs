@@ -15,11 +15,8 @@ namespace WPF_GameConsole
 		private const double pipeGap = 150;
 		private const double pipeWidth = 60;
 
-		private double birdY = 100;
+        private double birdY = 100;
 		private double velocity = 0;
-
-		private const double gravity = 0.5;
-		private const double jumpForce = -8;
 
 		private void GameIntermission()
 		{
@@ -44,8 +41,10 @@ namespace WPF_GameConsole
 
 		private void GameStart()
 		{
-			state = true;
-			Canvas.SetTop(Bird, birdY);
+            score = 0;
+            state = true;
+            scoreText.Content = score.ToString();
+            Canvas.SetTop(Bird, birdY);
 			spaceToStartInfo.Visibility = Visibility.Hidden;
 
 			gameTimer = new DispatcherTimer();
@@ -61,7 +60,7 @@ namespace WPF_GameConsole
 			for (int i = GameCanvas.Children.Count - 1; i >= 0; i--)
 			{
 				if (GameCanvas.Children[i] is Rectangle r &&
-					r.Tag?.ToString() == "Pipe")
+					(r.Tag?.ToString() == "TopPipe" || r.Tag?.ToString() == "BottomPipe" || r.Tag?.ToString() == "ScoredPipe"))
 				{
 					GameCanvas.Children.RemoveAt(i);
 				}
@@ -78,7 +77,6 @@ namespace WPF_GameConsole
 			double canvasHeight = GameCanvas.ActualHeight;
 			double canvasWidth = GameCanvas.ActualWidth;
 
-			// Canvas not ready → don't spawn
 			if (canvasHeight <= 0 || canvasWidth <= 0)
 				return;
 
@@ -98,7 +96,7 @@ namespace WPF_GameConsole
 				Width = pipeWidth,
 				Height = topPipeHeight,
 				Fill = Brushes.DarkGreen,
-				Tag = "Pipe"
+				Tag = "TopPipe"
 			};
 
 			Rectangle bottomPipe = new Rectangle
@@ -106,7 +104,7 @@ namespace WPF_GameConsole
 				Width = pipeWidth,
 				Height = canvasHeight - topPipeHeight - pipeGap,
 				Fill = Brushes.DarkGreen,
-				Tag = "Pipe"
+				Tag = "BottomPipe"
 			};
 
 			Canvas.SetLeft(topPipe, canvasWidth);
@@ -131,8 +129,8 @@ namespace WPF_GameConsole
 			for (int i = GameCanvas.Children.Count - 1; i >= 0; i--)
 			{
 				if (GameCanvas.Children[i] is Rectangle pipe &&
-					pipe.Tag?.ToString() == "Pipe")
-				{
+                    (pipe.Tag?.ToString() == "TopPipe" || pipe.Tag?.ToString() == "BottomPipe" || pipe.Tag?.ToString() == "ScoredPipe"))
+                {
 					double x = Canvas.GetLeft(pipe);
 					Canvas.SetLeft(pipe, x - pipeSpeed);
 
@@ -154,7 +152,17 @@ namespace WPF_GameConsole
 					bool xOverlap = birdRight > pipeLeft && birdLeft < pipeRight;
 					bool yOverlap = birdBottom > pipeTop && birdTop < pipeBottom;
 
-					if (xOverlap && yOverlap)
+                    if (pipe.Tag.ToString() == "TopPipe")
+                        {
+                        if (pipeRight < birdLeft)
+                        {
+                            score++;
+                            pipe.Tag = "ScoredPipe";
+                            scoreText.Content = score.ToString();
+                        }
+                    }
+
+                    if (xOverlap && yOverlap)
 					{
 						GameIntermission();
 						return;

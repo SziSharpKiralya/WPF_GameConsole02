@@ -20,9 +20,12 @@ namespace WPF_GameConsole
 		private Random random = new Random();
 		private string current = "";
 		private bool state = false;
-		
 
-		public MainWindow()
+        private int score = 0;
+        private const double gravity = 0.5;
+        private const double jumpForce = -8;
+
+        public MainWindow()
 		{
 			InitializeComponent();
 			LoadScreen_Menu();

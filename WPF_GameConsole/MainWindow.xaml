@@ -238,10 +238,10 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="3.5*" />
 				</Grid.RowDefinitions>
-				<Viewbox x:Name="scoreInfo"
-						 Stretch="Uniform"
+				<Viewbox Stretch="Uniform"
 						 Visibility="Visible">
-					<Label Content="0"
+                    <Label x:Name="scoreText"
+                           Content="0"
 						   FontWeight="Bold"
 						   Foreground="{StaticResource GameText}"
 						   Background="Transparent"
