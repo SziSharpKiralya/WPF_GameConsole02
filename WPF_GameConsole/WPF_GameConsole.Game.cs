@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -139,10 +140,10 @@ namespace WPF_GameConsole
 						GameCanvas.Children.RemoveAt(i);
 					}
 
-					double birdTop = birdY + 6;
-					double birdBottom = birdY + Bird.Height - 8;
-					double birdLeft = Canvas.GetLeft(Bird) + 6;
-					double birdRight = birdLeft + Bird.Width - 12;
+					double birdTop = birdY + 3;
+					double birdBottom = birdY + Bird.Height - 6;
+					double birdLeft = Canvas.GetLeft(Bird) + 5;
+					double birdRight = birdLeft + Bird.Width - 8;
 
 					double pipeLeft = Canvas.GetLeft(pipe);
 					double pipeRight = pipeLeft + pipe.Width;
@@ -164,11 +165,21 @@ namespace WPF_GameConsole
 
                     if (xOverlap && yOverlap)
 					{
-						GameIntermission();
+						SaveScore();
+                        GameIntermission();
 						return;
 					}
 				}
 			}
 		}
-	}
+
+        private void SaveScore()
+        {
+            string filePath = "scores.txt";
+            string timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string line = $"{timeStamp}  |  Score: {score}";
+
+            File.AppendAllText(filePath, line + Environment.NewLine);
+        }
+    }
 }

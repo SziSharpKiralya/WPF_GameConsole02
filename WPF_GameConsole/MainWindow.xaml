@@ -193,7 +193,7 @@
 								Margin="0,5,0,5">
 						</Button>
 						<Button Grid.Row="2"
-								Content="???"
+								Content="Scores"
 								FontSize="24"
 								Background="DimGray"
 								Foreground="{StaticResource GameText}"
@@ -201,8 +201,9 @@
 								BorderThickness="0"
 								VerticalAlignment="Stretch"
 								HorizontalAlignment="Stretch"
-								Margin="0,5,0,5">
-						</Button>
+								Margin="0,5,0,5"
+                                Click="btnScores_Click">
+                        </Button>
 					</Grid>
 				</Viewbox>
 			</Grid>
@@ -217,11 +218,50 @@
 					   HorizontalContentAlignment="Center" />
 			</Viewbox>
 		</Grid>
-		<Grid x:Name="screen_Game"
+        <Grid x:Name="screen_Scores"
+              Grid.Row="1"
+              Grid.Column="2"
+              Background="DarkKhaki"
+              Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="0.5*" />
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="0"
+                     Stretch="Uniform">
+                <Label Content="Scores"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Background="Transparent"
+                       FontFamily="Broadway"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center" />
+            </Viewbox>
+            <Grid Grid.Row="1">
+                <ScrollViewer Margin="0,5,0,5"
+                              VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="scoresPanel"
+                                Orientation="Vertical">
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <Viewbox Grid.Row="2"
+                     Stretch="Uniform">
+                <Label Content="Made by: Marcell Csengeri in 2026 ©️"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Background="Transparent"
+                       FontFamily="Broadway"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center" />
+            </Viewbox>
+        </Grid>
+        <Grid x:Name="screen_Game"
 			  Grid.Row="1"
 			  Grid.Column="2"
 			  Background="DarkKhaki"
-			  Visibility="Visible">
+			  Visibility="Hidden">
 			<Viewbox x:Name="spaceToStartInfo"
 					 Panel.ZIndex="2"
 					 Margin="70"
