@@ -21,7 +21,12 @@ namespace WPF_GameConsole
 
 		private void GameIntermission()
 		{
-			if (gameTimer != null)
+			if (score > 0)
+			{
+                SaveScore();
+            }
+
+            if (gameTimer != null)
 			{
 				gameTimer.Stop();
 				gameTimer.Tick -= GameLoop;
@@ -165,7 +170,6 @@ namespace WPF_GameConsole
 
                     if (xOverlap && yOverlap)
 					{
-						SaveScore();
                         GameIntermission();
 						return;
 					}
@@ -177,7 +181,7 @@ namespace WPF_GameConsole
         {
             string filePath = "scores.txt";
             string timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string line = $"{timeStamp}  |  Score: {score}";
+            string line = $"{timeStamp} | {mode} |  Score: {score}";
 
             File.AppendAllText(filePath, line + Environment.NewLine);
         }

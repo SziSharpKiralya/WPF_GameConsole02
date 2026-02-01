@@ -41,11 +41,43 @@ namespace WPF_GameConsole
 			LoadScreen_Game();
 		}
 
+        private void btnModes_Click(object sender, RoutedEventArgs e)
+        {
+            LoadScreen_Modes();
+        }
+
         private void btnScores_Click(object sender, RoutedEventArgs e)
         {
             LoadScreen_Scores();
         }
-        
+
+        private void btndiffNormal_Click(object sender, RoutedEventArgs e)
+        {
+            mode = "Normal";
+            gravity = 0.5;
+            jumpForce = -8;
+            Fog.Visibility = Visibility.Hidden;
+            Rain.Visibility = Visibility.Hidden;
+        }
+
+        private void btndiffRain_Click(object sender, RoutedEventArgs e)
+        {
+            mode = "Rain";
+            gravity = 1.2;
+            jumpForce = -6;
+            Fog.Visibility = Visibility.Hidden;
+            Rain.Visibility = Visibility.Visible;
+        }
+
+        private void btndiffFog_Click(object sender, RoutedEventArgs e)
+        {
+            mode = "Fog";
+            gravity = 0.5;
+            jumpForce = -8;
+            Fog.Visibility = Visibility.Visible;
+            Rain.Visibility = Visibility.Hidden;
+        }
+
         private void LoadScreen_Menu()
 		{
 			current = "Menu";
@@ -53,6 +85,17 @@ namespace WPF_GameConsole
 			screen_Menu.Visibility = Visibility.Visible;
 			screen_Game.Visibility = Visibility.Hidden;
             screen_Scores.Visibility = Visibility.Hidden;
+            screen_Modes.Visibility = Visibility.Hidden;
+        }
+
+        private void LoadScreen_Modes()
+        {
+            current = "Modes";
+            windowMenuTitle.Content = current;
+            screen_Menu.Visibility = Visibility.Hidden;
+            screen_Game.Visibility = Visibility.Hidden;
+            screen_Scores.Visibility = Visibility.Hidden;
+            screen_Modes.Visibility = Visibility.Visible;
         }
 
         private void LoadScreen_Scores()
@@ -63,6 +106,7 @@ namespace WPF_GameConsole
             screen_Menu.Visibility = Visibility.Hidden;
             screen_Game.Visibility = Visibility.Hidden;
             screen_Scores.Visibility = Visibility.Visible;
+            screen_Modes.Visibility = Visibility.Hidden;
         }
 
         private void LoadScreen_Game()
@@ -75,6 +119,7 @@ namespace WPF_GameConsole
 			screen_Menu.Visibility = Visibility.Hidden;
 			screen_Game.Visibility = Visibility.Visible;
             screen_Scores.Visibility = Visibility.Hidden;
+            screen_Modes.Visibility = Visibility.Hidden;
         }
 
         private void LoadScores()

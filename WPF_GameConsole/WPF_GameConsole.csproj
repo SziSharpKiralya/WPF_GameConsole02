@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Images\Actor_Bird.png" />
+    <None Remove="Images\Actor_Fog.png" />
     <None Remove="Images\Actor_PipeBottom.png" />
     <None Remove="Images\Actor_PipeTop.png" />
   </ItemGroup>
@@ -18,10 +19,16 @@
     <Resource Include="Images\Actor_Bird.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Actor_Fog.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Actor_PipeBottom.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Actor_PipeTop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Actor_Rain.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -19,11 +19,12 @@ namespace WPF_GameConsole
 	{
 		private Random random = new Random();
 		private string current = "";
-		private bool state = false;
+        private string mode = "Normal";
+        private bool state = false;
 
         private int score = 0;
-        private const double gravity = 0.5;
-        private const double jumpForce = -8;
+        private double gravity = 0.5;
+        private double jumpForce = -8;
 
         public MainWindow()
 		{
